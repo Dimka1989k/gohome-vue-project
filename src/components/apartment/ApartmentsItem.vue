@@ -9,7 +9,7 @@
             <div class="apartments-item__rating">
                 <StarRating :rating="rating"/>
             </div>
-            <div class="apartments-item__price">UAH {{ price }}</div>
+            <div class="apartments-item__price">UAH {{ price }} <span>за ніч</span></div>
             </div>
         </div>
     </div>
@@ -24,10 +24,8 @@ import StarRating from '../StarRating.vue';
 
 export default {
     name: 'ApartmentsItem',
-    compomemts: {
-        StarRating,
-    },
-    props: {
+  compomemts: { StarRating },
+      props: {
         descr: {
             type: String,
             default: ''
@@ -40,7 +38,7 @@ export default {
             type: Number,
             required: true
         },
-        img: {
+        imgSrc: {
             type: String,
             default: ''
         }
@@ -53,7 +51,7 @@ export default {
 .apartments-item {
   position: relative;
   max-width: 350px;
-  padding: 0 20px;
+  padding: 0 15px;
   
 
   &__inner {
@@ -90,7 +88,7 @@ export default {
 
   &__price {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   &__photo {
