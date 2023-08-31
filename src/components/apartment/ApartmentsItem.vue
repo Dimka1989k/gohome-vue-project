@@ -24,7 +24,7 @@ import StarRating from '../StarRating.vue';
 
 export default {
     name: 'ApartmentsItem',
-  compomemts: { StarRating },
+  components: { StarRating },
       props: {
         descr: {
             type: String,
@@ -43,7 +43,7 @@ export default {
             default: ''
         }
     },
-    components: { StarRating }
+    
 }
 </script>
 
@@ -52,6 +52,7 @@ export default {
   position: relative;
   max-width: 350px;
   padding: 0 15px;
+  margin-bottom: 30px;
   
 
   &__inner {
