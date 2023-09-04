@@ -1,5 +1,5 @@
 <template>
-    <div class="apartments-item">
+    <div class="apartments-item" @click="log">
         <div class="apartments-item__inner">
            <img :src="imgSrc" alt="" class="apartments-item__photo" />
             <div class="apartments-item__content">
@@ -23,26 +23,32 @@ import StarRating from '../StarRating.vue';
 
 
 export default {
-    name: 'ApartmentsItem',
+  name: 'ApartmentsItem',
   components: { StarRating },
-      props: {
-        descr: {
-            type: String,
-            default: ''
-        },
-        rating: {
-            type: Number,
-            default: 0
-        },
-        price: {
-            type: Number,
-            required: true
-        },
-        imgSrc: {
-            type: String,
-            default: ''
-        }
+  props: {
+    descr: {
+      type: String,
+      default: ''
     },
+    rating: {
+      type: Number,
+      default: 0
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    imgSrc: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    log(event) {
+      console.log(event)
+    }
+
+  }
     
 }
 </script>
@@ -50,7 +56,7 @@ export default {
 <style lang="scss" scoped>
 .apartments-item {
   position: relative;
-  max-width: 350px;
+  width: 33.333%;
   padding: 0 15px;
   margin-bottom: 30px;
   
