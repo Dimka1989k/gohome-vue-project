@@ -1,9 +1,6 @@
 <template>
-    <button v-on="$attrs" v-bind:type="type" :class="{ btn: true, 'btn--outlined': outlined }">
-       
-        <span class="btn__content">
-            <slot></slot>
-        </span>
+    <button v-bind="$attrs" @click="$emit('click')" :type="type" :class="{ btn: true, 'btn--outlined': outlined }">
+        <slot></slot>
     </button>
 </template>
 
@@ -11,9 +8,7 @@
 
 export default {
     name: 'ButtonSubmit',
-    components: {
-        
-    },
+    inheritAttrs: false,
     props: {
         type: {
             type: String,
@@ -23,9 +18,9 @@ export default {
             type: Boolean,
             default: false,
         },
-        
+
     },
-   
+
 };
 </script>
 
@@ -49,7 +44,7 @@ export default {
         border: 1px solid #ff662d;
     }
 
-   
+
 
     &__content {
         &--hidden {
@@ -57,6 +52,6 @@ export default {
         }
     }
 
-   
+
 }
 </style>

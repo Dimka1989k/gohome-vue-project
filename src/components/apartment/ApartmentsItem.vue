@@ -1,5 +1,5 @@
 <template>
-    <div class="apartments-item" @click="log">
+    <div class="apartments-item">
         <div class="apartments-item__inner">
            <img :src="imgSrc" alt="" class="apartments-item__photo" />
             <div class="apartments-item__content">
@@ -9,7 +9,8 @@
             <div class="apartments-item__rating">
                 <StarRating :rating="rating"/>
             </div>
-            <div class="apartments-item__price">UAH {{ price }} <span>за ніч</span></div>
+            <div class="apartments-item__price">UAH {{ price }} 
+          </div>
             </div>
         </div>
     </div>
@@ -43,12 +44,7 @@ export default {
       default: ''
     }
   },
-  methods: {
-    log(event) {
-      console.log(event)
-    }
-
-  }
+ 
     
 }
 </script>

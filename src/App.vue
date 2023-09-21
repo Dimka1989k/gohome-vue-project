@@ -1,8 +1,10 @@
 <template>
   <div>
-    <ContainerUp>  
-    <ApertmentFilterForm class="apartment-filter"/>
-    </ContainerUp>   
+    <ContainerShared>  
+    <ApertmentFilterForm 
+    class="apartment-filter" 
+    @submit="loger"/>
+    </ContainerShared>   
     <ApartmentsList :items="apartments">          
       <template v-slot:apartment="{apartment}">
         <ApartmentsItem         
@@ -11,7 +13,8 @@
           :rating="apartment.rating"
           :imgSrc="apartment.imgUrl"
           :price="apartment.price"
-           />
+         
+          />
       </template>         
     </ApartmentsList>  
   </div>     
@@ -21,24 +24,27 @@
 import ApartmentsList from './components/apartment/ApartmentsList.vue'
 import apartments from './components/apartment/apartments'
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue'
-// import CustomInput from './components/Shared/CustomInput.vue'
-// import CustomSelect from './components/Shared/CustomSelect.vue'
 import ApertmentFilterForm from './components/apartment/ApertmentFilterForm.vue'
-import ContainerUp from './components/Shared/ContainerUp.vue'
+import ContainerShared from './components/Shared/ContainerShared.vue'
 
 
 export default {
   name: 'App',
-  components: { ApartmentsList, ApartmentsItem, ApertmentFilterForm, ContainerUp },
+  components: { ApartmentsList, ApartmentsItem, ApertmentFilterForm, ContainerShared },
   data() {
     return {
-      text: "",
+      text: '',
       apartments,
-      
      
-        }
-      }
     }
+  }, 
+  methods: {
+    loger(value) {
+      console.log(value, '----value form');
+    },
+   
+  }
+}
  
   
 
