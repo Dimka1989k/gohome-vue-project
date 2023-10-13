@@ -1,18 +1,24 @@
 <template>
-  
-    <input v-on="$attrs" class="custom-input">
-  
+  <input v-bind="$attrs" class="custom-input" />
 </template>
 
 <script>
 export default {
-  name: 'CustomInput',
- 
-}
+  name: "CustomInput",
+
+  computed: {
+    listeners() {
+      return {
+        ...this.$attrs,
+        input: (event) => this.$emit("input", event.target.value),
+      };
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variables';
+@import "../../assets/scss/variables";
 
 .custom-input {
   height: 40px;

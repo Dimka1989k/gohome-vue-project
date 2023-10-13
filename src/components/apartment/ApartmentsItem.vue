@@ -1,52 +1,45 @@
 <template>
-    <div class="apartments-item">
-        <div class="apartments-item__inner">
-           <img :src="imgSrc" alt="" class="apartments-item__photo" />
-            <div class="apartments-item__content">
-            <p class="apartments-item__description">
-                {{ descr }}
-            </p>
-            <div class="apartments-item__rating">
-                <StarRating :rating="rating"/>
-            </div>
-            <div class="apartments-item__price">UAH {{ price }} 
-          </div>
-            </div>
+  <div class="apartments-item">
+    <div class="apartments-item__inner">
+      <img :src="imgSrc" alt="" class="apartments-item__photo" />
+      <div class="apartments-item__content">
+        <p class="apartments-item__description">
+          {{ descr }}
+        </p>
+        <div class="apartments-item__rating">
+          <StarRating :rating="rating" />
         </div>
+        <div class="apartments-item__price">UAH {{ price }}</div>
+      </div>
     </div>
+  </div>
 </template>
 
-
-
 <script>
-
-import StarRating from '../StarRating.vue';
-
+import StarRating from "../StarRating.vue";
 
 export default {
-  name: 'ApartmentsItem',
+  name: "ApartmentsItem",
   components: { StarRating },
   props: {
     descr: {
       type: String,
-      default: ''
+      default: "",
     },
     rating: {
       type: Number,
-      default: 0
+      default: 0,
     },
     price: {
       type: Number,
-      required: true
+      required: true,
     },
     imgSrc: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
- 
-    
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -55,7 +48,6 @@ export default {
   width: 33.333%;
   padding: 0 15px;
   margin-bottom: 30px;
-  
 
   &__inner {
     position: relative;
@@ -102,8 +94,5 @@ export default {
     height: 100%;
     object-fit: cover;
   }
-
-  
 }
-
 </style>
