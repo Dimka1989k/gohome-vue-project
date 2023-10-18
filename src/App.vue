@@ -1,22 +1,25 @@
 <template>
-  <div class="content">
-    <ContainerShared>
-      <ApartmentFilterForm class="apartment-filter" @submit="filter" />
-    </ContainerShared>
-    <ContainerShared>
-      <p v-if="!filteredApartments.length">Nothing found</p>
-      <ApartmentsList v-else :items="filteredApartments">
-        <template v-slot:apartment="{ apartment }">
-          <ApartmentsItem
-            :key="apartment.id"
-            :descr="apartment.descr"
-            :rating="apartment.rating"
-            :imgSrc="apartment.imgUrl"
-            :price="apartment.price"
-          />
-        </template>
-      </ApartmentsList>
-    </ContainerShared>
+  <div id="app">
+    <div class="content">
+      <HeaderApp />
+      <ContainerShared>
+        <ApartmentFilterForm class="apartment-filter" @submit="filter" />
+      </ContainerShared>
+      <ContainerShared>
+        <p class="paragraph" v-if="!filteredApartments.length">Nothing found</p>
+        <ApartmentsList v-else :items="filteredApartments">
+          <template v-slot:apartment="{ apartment }">
+            <ApartmentsItem
+              :key="apartment.id"
+              :descr="apartment.descr"
+              :rating="apartment.rating"
+              :imgSrc="apartment.imgUrl"
+              :price="apartment.price"
+            />
+          </template>
+        </ApartmentsList>
+      </ContainerShared>
+    </div>
     <FooterApp />
   </div>
 </template>
@@ -28,6 +31,7 @@ import ApartmentsItem from "./components/apartment/ApartmentsItem.vue";
 import ApartmentFilterForm from "./components/apartment/ApartmentFilterForm.vue";
 import ContainerShared from "./components/Shared/ContainerShared.vue";
 import FooterApp from "./components/Shared/FooterApp.vue";
+import HeaderApp from "./components/Shared/HeaderApp.vue";
 
 export default {
   name: "App",
@@ -37,6 +41,7 @@ export default {
     ApartmentFilterForm,
     ContainerShared,
     FooterApp,
+    HeaderApp,
   },
   data() {
     return {
@@ -81,17 +86,27 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 .content {
   flex-grow: 1;
+  padding-top: 120px;
 }
 
 .apartment-filter {
   margin-bottom: 40px;
+}
+
+.paragraph {
+  display: flex;
+  justify-content: center;
+  padding-top: 200px;
+
+  font-size: 22px;
+  color: red;
 }
 </style>

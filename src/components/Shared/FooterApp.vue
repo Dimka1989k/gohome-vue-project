@@ -13,6 +13,5 @@ export default {
 .footer {
   background-color: $secondary-color;
   height: 30px;
-  margin-top: 66px;
 }
 </style>

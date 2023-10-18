@@ -1,15 +1,13 @@
 <template>
-    <div>
-
-    </div>
+  <div>
+    <img src="../../assets/logo.svg" alt="" />
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+  name: "LogoApp",
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
