@@ -1,17 +1,13 @@
 <template>
-  <input v-bind="$attrs" class="custom-input" />
+  <input v-bind="$attrs" v-on:input="handleInput" class="custom-input" />
 </template>
 
 <script>
 export default {
   name: "CustomInput",
-
-  computed: {
-    listeners() {
-      return {
-        ...this.$attrs,
-        input: (event) => this.$emit("input", event.target.value),
-      };
+  methods: {
+    handleInput(event) {
+      this.$emit("input", event.target.value);
     },
   },
 };

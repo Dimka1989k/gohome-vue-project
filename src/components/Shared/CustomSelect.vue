@@ -1,5 +1,5 @@
 <template>
-  <select v-bind="$attrs" class="custom-select">
+  <select v-bind="$attrs" v-on:input="handleInput" class="custom-select">
     <option
       v-for="item in formatedItems"
       :key="item.value"
@@ -14,7 +14,6 @@
 <script>
 export default {
   name: "CustomSelect",
-
   props: {
     items: {
       type: Array,
@@ -26,6 +25,11 @@ export default {
       return this.items.map((item) => {
         return typeof item === "object" ? item : { value: item, label: item };
       });
+    },
+  },
+  methods: {
+    handleInput(event) {
+      this.$emit("input", event.target.value);
     },
   },
 };

@@ -16,6 +16,10 @@ export default {
   name: "ApartmentsList",
   components: { ContainerShared },
   props: {
+    title: {
+      type: String,
+      default: "",
+    },
     items: {
       type: Array,
       default: () => [],
