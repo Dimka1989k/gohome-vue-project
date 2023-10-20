@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log("City:", this.city, "Price:", this.price);
       this.$emit("submit", { city: this.city, price: this.price });
     },
   },
