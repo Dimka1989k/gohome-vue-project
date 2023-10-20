@@ -1,6 +1,7 @@
 import VueRouter from "vue-router";
 import HomePage from "./pages/HomePage";
 import ApartmentPage from "./pages/ApartmentPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: "/apartment",
     component: ApartmentPage,
     name: "apartment",
+  },
+  {
+    path: "*",
+    component: ErrorPage,
+    name: "errorpage",
   },
 ];
 
