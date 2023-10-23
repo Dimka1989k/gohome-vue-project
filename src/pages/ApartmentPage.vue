@@ -3,28 +3,39 @@
     <ContainerShared>
       <div class="apartment-page__content">
         <ApartmentsMainInfo :apartment="apartment" />
-        <ApartmentsOwner
-          class="apartment-page__owner"
-          :owner="apartment.owner"
-        />
+        <div class="aprtment-page__additional-info">
+          <ApartmentsOwner
+            class="apartment-page__owner"
+            :owner="apartment.owner"
+          />
+          <ReviewsYour :reviews="reviewsList" />
+        </div>
       </div>
     </ContainerShared>
   </main>
 </template>
 
 <script>
-import ContainerShared from "../components/Shared/ContainerShared.vue";
+import ContainerShared from "../components/Shared/ContainerShared";
 import apartments from "../components/apartment/apartments";
-import ApartmentsMainInfo from "../components/apartment/ApartmentsMainInfo.vue";
-import ApartmentsOwner from "@/components/apartment/ApartmentsOwner.vue";
+import ApartmentsMainInfo from "../components/apartment/ApartmentsMainInfo";
+import ApartmentsOwner from "../components/apartment/ApartmentsOwner";
+import ReviewsYour from "../components/reviews/ReviewsYour.vue";
+import reviewsList from "../components/reviews/reviews.json";
+
 export default {
   name: "ApartmentPage",
   components: {
     ContainerShared,
     ApartmentsMainInfo,
     ApartmentsOwner,
+    ReviewsYour,
   },
   computed: {
+    reviewsList() {
+      return reviewsList;
+    },
+
     apartment() {
       return apartments.find(
         (apartment) => apartment.id === this.$route.params.id
