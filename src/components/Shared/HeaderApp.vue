@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <ContainerShared>
-      <LogoApp />
+      <router-link to="/">
+        <LogoApp />
+      </router-link>
     </ContainerShared>
   </header>
 </template>

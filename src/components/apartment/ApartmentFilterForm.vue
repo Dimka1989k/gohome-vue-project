@@ -6,7 +6,13 @@
       class="form__select"
       id="city-select"
     />
-    <CustomInput v-model="price" placeholder="Price" id="price-input" />
+    <CustomInput
+      v-model="price"
+      placeholder="Price from"
+      id="price-input"
+      error-message="This field must not be empty"
+      :rules="rules"
+    />
     <ButtonSubmit class="form__submit" type="submit"
       >Housing selection</ButtonSubmit
     >
@@ -17,6 +23,7 @@
 import CustomSelect from "../Shared/CustomSelect.vue";
 import CustomInput from "../Shared/CustomInput.vue";
 import ButtonSubmit from "../Shared/ButtonSubmit.vue";
+import { isRequired, charLimit } from "../../utils/validationRules.js";
 
 export default {
   components: {
@@ -32,6 +39,9 @@ export default {
     };
   },
   computed: {
+    rules() {
+      return [isRequired, charLimit(10)];
+    },
     cities() {
       return [
         { value: "", label: "City", selected: true },
