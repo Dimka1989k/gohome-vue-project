@@ -19,6 +19,12 @@ export default {
       error: "",
     };
   },
+  inject: {
+    form: {
+      default: null,
+    },
+  },
+  inheritAttrs: false,
 
   props: {
     value: {
@@ -61,6 +67,10 @@ export default {
         }
         return hasPassed;
       });
+      return this.isValid;
+    },
+    reset() {
+      this.$emit("input", "");
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <FormApp ref="form" @submit.prevent="handleSubmit">
-    <InputLoginForm v-model="formData.email" name="email" :rules="emailRules" />
-    <InputLoginForm
+    <CustomInput v-model="formData.email" name="email" :rules="emailRules" />
+    <CustomInput
       v-model="formData.password"
       name="password"
       :rules="passwordRules"
@@ -12,7 +12,7 @@
 
 <script>
 import FormApp from "../../components/Shared/Form/FormApp.vue";
-import InputLoginForm from "../../components/Login/InputLoginForm.vue";
+import CustomInput from "../../components/Shared/CustomInput.vue";
 import ButtonSubmit from "../Shared/ButtonSubmit.vue";
 import {
   emailValidation,
@@ -24,7 +24,7 @@ export default {
   name: "LoginForm",
   components: {
     FormApp,
-    InputLoginForm,
+    CustomInput,
     ButtonSubmit,
   },
   data() {
@@ -53,7 +53,7 @@ export default {
   methods: {
     handleSubmit() {
       const isFormValid = this.$refs.form.validate();
-      if (isFormValid) {
+      if (!isFormValid) {
         console.log(this.formData);
       }
     },

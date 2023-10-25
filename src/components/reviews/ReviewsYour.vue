@@ -55,7 +55,7 @@ export default {
     },
     buttonText() {
       return this.reviewsLimit === this.reviews.length
-        ? "Turn"
+        ? "Read less"
         : "Read more...";
     },
   },
