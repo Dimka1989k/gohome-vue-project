@@ -24,11 +24,10 @@
 
 <script>
 import ApartmentsList from "../components/apartment/ApartmentsList.vue";
-// import apartments from "../components/apartment/apartments";
 import ApartmentsItem from "../components/apartment/ApartmentsItem.vue";
 import ApartmentFilterForm from "../components/apartment/ApartmentFilterForm.vue";
 import ContainerShared from "../components/Shared/ContainerShared.vue";
-import { getApartmentsList } from "../services/apartments.service";
+import { getApartmentsList } from "../services/apartments.service.js";
 
 export default {
   name: "App",

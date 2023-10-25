@@ -38,6 +38,7 @@ export default {
       city: "",
     };
   },
+
   computed: {
     rules() {
       return [isRequired, charLimit(10)];

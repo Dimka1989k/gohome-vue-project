@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ReviewsHeading from "./ReviewsHeading";
+import ReviewsHeading from "./ReviewsHeading.vue";
 
 export default {
   name: "ReviewsItem",

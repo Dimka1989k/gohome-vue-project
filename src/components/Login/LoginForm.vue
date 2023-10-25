@@ -1,21 +1,30 @@
 <template>
-  <FormLogin @submit.prevent="handleSubmit">
-    <CustomInput v-model="formData.email" name="email" />
-    <CustomInput v-model="formData.password" name="password" />
+  <FormApp ref="form" @submit.prevent="handleSubmit">
+    <InputLoginForm v-model="formData.email" name="email" :rules="emailRules" />
+    <InputLoginForm
+      v-model="formData.password"
+      name="password"
+      :rules="passwordRules"
+    />
     <ButtonSubmit type="submit">Click me</ButtonSubmit>
-  </FormLogin>
+  </FormApp>
 </template>
 
 <script>
-import FormLogin from "../../components/Shared/Form/FormLogin";
-import CustomInput from "../../components/Shared/CustomInput";
-import ButtonSubmit from "../Shared/ButtonSubmit";
+import FormApp from "../../components/Shared/Form/FormApp.vue";
+import InputLoginForm from "../../components/Login/InputLoginForm.vue";
+import ButtonSubmit from "../Shared/ButtonSubmit.vue";
+import {
+  emailValidation,
+  passwordValidation,
+  isRequired,
+} from "../../utils/validationRules";
 
 export default {
   name: "LoginForm",
   components: {
-    FormLogin,
-    CustomInput,
+    FormApp,
+    InputLoginForm,
     ButtonSubmit,
   },
   data() {
@@ -26,9 +35,27 @@ export default {
       },
     };
   },
+  computed: {
+    rules() {
+      return {
+        emailValidation,
+        passwordValidation,
+        isRequired,
+      };
+    },
+    emailRules() {
+      return [this.rules.isRequired, this.rules.emailValidation];
+    },
+    passwordRules() {
+      return [this.rules.isRequired, this.rules.passwordValidation];
+    },
+  },
   methods: {
     handleSubmit() {
-      console.log(this.formData);
+      const isFormValid = this.$refs.form.validate();
+      if (isFormValid) {
+        console.log(this.formData);
+      }
     },
   },
 };

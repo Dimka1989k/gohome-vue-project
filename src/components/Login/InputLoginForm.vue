@@ -1,7 +1,6 @@
 <template>
   <div class="wraper-input">
     <input
-      v-bind="$attrs"
       v-on:input="handleInput"
       class="custom-input"
       :class="!isValid && 'custom-input--error'"
@@ -12,14 +11,15 @@
 
 <script>
 export default {
-  name: "CustomInput",
+  name: "InputLoginForm",
   data() {
     return {
       isValid: true,
       error: "",
     };
   },
-
+  inject: ["form"],
+  inheritAttrs: false,
   props: {
     value: {
       type: String,
@@ -61,6 +61,9 @@ export default {
         }
         return hasPassed;
       });
+    },
+    reset() {
+      this.$emit("input", "");
     },
   },
 };

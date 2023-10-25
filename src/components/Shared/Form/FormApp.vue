@@ -1,12 +1,12 @@
 <template>
-  <form v-on="$attrs" class="form">
+  <form v-bind="$attrs" class="form">
     <slot></slot>
   </form>
 </template>
 
 <script>
 export default {
-  name: "FormLogin",
+  name: "FormApp",
   provide() {
     return {
       form: this,
@@ -21,11 +21,14 @@ export default {
     registerInput(input) {
       this.inputs.push(input);
     },
-    unregisterInput(input) {
+    unRegisterInput(input) {
       this.inputs.filter((item) => item !== input);
     },
     validate() {
-      return this.inputs.every((input) => input.validate());
+      return this.inputs.reduce((isValid, input) => {
+        const isInputValid = input.validate();
+        return isValid && isInputValid;
+      }, true);
     },
     reset() {
       this.inputs.forEach((input) => input.reset());
