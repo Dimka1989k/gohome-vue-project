@@ -1,24 +1,26 @@
 <template>
   <main class="homepage">
-    <ContainerShared>
-      <ApartmentFilterForm class="apartment-filter" @submit="filter" />
-      <p class="selection">Selection according to choice</p>
-    </ContainerShared>
-    <ContainerShared>
-      <p class="paragraph" v-if="!filteredApartments.length">Nothing found</p>
-      <ApartmentsList v-else :items="filteredApartments">
-        <template v-slot:apartment="{ apartment }">
-          <ApartmentsItem
-            :key="apartment.id"
-            :id="apartment.id"
-            :descr="apartment.descr"
-            :rating="apartment.rating"
-            :imgSrc="apartment.imgUrl"
-            :price="apartment.price"
-          />
-        </template>
-      </ApartmentsList>
-    </ContainerShared>
+    <SectionSpacer>
+      <ContainerShared>
+        <ApartmentFilterForm class="apartment-filter" @submit="filter" />
+        <p class="selection">Selection according to choice</p>
+      </ContainerShared>
+      <ContainerShared>
+        <p class="paragraph" v-if="!filteredApartments.length">Nothing found</p>
+        <ApartmentsList v-else :items="filteredApartments">
+          <template v-slot:apartment="{ apartment }">
+            <ApartmentsItem
+              :key="apartment.id"
+              :id="apartment.id"
+              :descr="apartment.descr"
+              :rating="apartment.rating"
+              :imgSrc="apartment.imgUrl"
+              :price="apartment.price"
+            />
+          </template>
+        </ApartmentsList>
+      </ContainerShared>
+    </SectionSpacer>
   </main>
 </template>
 
@@ -28,6 +30,7 @@ import ApartmentsItem from "../components/apartment/ApartmentsItem.vue";
 import ApartmentFilterForm from "../components/apartment/ApartmentFilterForm.vue";
 import ContainerShared from "../components/Shared/ContainerShared.vue";
 import { getApartmentsList } from "../services/apartments.service.js";
+import SectionSpacer from "@/components/Shared/SectionSpacer.vue";
 
 export default {
   name: "App",
@@ -36,6 +39,7 @@ export default {
     ApartmentsItem,
     ApartmentFilterForm,
     ContainerShared,
+    SectionSpacer,
   },
   data() {
     return {
@@ -85,20 +89,6 @@ export default {
 </script>
 
 <style>
-#app {
-  display: flex;
-  flex-direction: column;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-}
-
-.content {
-  flex-grow: 1;
-  padding-top: 120px;
-}
-
 .apartment-filter {
   margin-bottom: 40px;
 }

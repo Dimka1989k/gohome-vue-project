@@ -1,27 +1,30 @@
 <template>
   <main class="apartment-page">
-    <ContainerShared>
-      <div v-if="apartment" class="apartment-page__content">
-        <ApartmentsMainInfo :apartment="apartment" />
-        <div class="aprtment-page__additional-info">
-          <ApartmentsOwner
-            class="apartment-page__owner"
-            :owner="apartment.owner"
-          />
-          <ReviewsYour :reviews="reviewsList" />
+    <SectionSpacer>
+      <ContainerShared>
+        <div v-if="apartment" class="apartment-page__content">
+          <ApartmentsMainInfo :apartment="apartment" />
+          <div class="aprtment-page__additional-info">
+            <ApartmentsOwner
+              class="apartment-page__owner"
+              :owner="apartment.owner"
+            />
+            <ReviewsYour :reviews="reviewsList" />
+          </div>
         </div>
-      </div>
-    </ContainerShared>
+      </ContainerShared>
+    </SectionSpacer>
   </main>
 </template>
 
 <script>
-import ContainerShared from "../components/Shared/ContainerShared";
-import ApartmentsMainInfo from "../components/apartment/ApartmentsMainInfo";
-import ApartmentsOwner from "../components/apartment/ApartmentsOwner";
+import ContainerShared from "../components/Shared/ContainerShared.vue";
+import ApartmentsMainInfo from "../components/apartment/ApartmentsMainInfo.vue";
+import ApartmentsOwner from "../components/apartment/ApartmentsOwner.vue";
 import ReviewsYour from "../components/reviews/ReviewsYour.vue";
 import reviewsList from "../components/reviews/reviews.json";
 import { getApartmentById } from "../services/apartments.service";
+import SectionSpacer from "@/components/Shared/SectionSpacer.vue";
 
 export default {
   name: "ApartmentPage",
@@ -30,6 +33,7 @@ export default {
     ApartmentsMainInfo,
     ApartmentsOwner,
     ReviewsYour,
+    SectionSpacer,
   },
   data() {
     return {

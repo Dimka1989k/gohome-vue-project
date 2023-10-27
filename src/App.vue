@@ -30,4 +30,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
 }
+
+.content {
+  flex-grow: 1;
+}
 </style>

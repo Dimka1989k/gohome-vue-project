@@ -85,7 +85,6 @@ export default {
 }
 .custom-input {
   height: 40px;
-  max-width: 220px;
   width: 100%;
   border: 2px solid $main-color;
   font-size: 18px;
