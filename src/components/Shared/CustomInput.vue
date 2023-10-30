@@ -5,6 +5,8 @@
       v-on:input="handleInput"
       class="custom-input"
       :class="!isValid && 'custom-input--error'"
+      :value="value"
+      @blur="blurHandler"
     />
     <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
@@ -17,6 +19,7 @@ export default {
     return {
       isValid: true,
       error: "",
+      isFirstInput: true,
     };
   },
   inject: {
@@ -43,6 +46,7 @@ export default {
 
   watch: {
     value(value) {
+      if (this.isFirstInput) return;
       this.validate(value);
     },
   },
@@ -69,7 +73,15 @@ export default {
       });
       return this.isValid;
     },
+    blurHandler() {
+      if (this.isFirstInput) {
+        this.validate();
+      }
+      this.isFirstInput = false;
+    },
     reset() {
+      this.isFirstInput = true;
+      this.isValid = true;
       this.$emit("input", "");
     },
   },

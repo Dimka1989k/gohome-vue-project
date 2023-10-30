@@ -1,17 +1,29 @@
 <template>
-  <AuthContainer class="login">
-    <h1 class="login__title">Login</h1>
-    <FormApp class="login__form" ref="form" @submit.prevent="handleSubmit">
+  <AuthContainer class="registration">
+    <h1 class="registration__title">Registration</h1>
+    <FormApp
+      class="registration__form"
+      ref="form"
+      @submit.prevent="handleSubmit"
+    >
+      <CustomInput
+        v-model="formData.name"
+        name="name"
+        :rules="nameRules"
+        class="registration__input"
+        placeholder="Name"
+        autocomplete="username"
+      />
       <CustomInput
         v-model="formData.email"
         name="email"
         :rules="emailRules"
-        class="login__input"
+        class="registration__input"
         placeholder="Email"
         autocomplete="email"
       />
       <CustomInput
-        class="login__input"
+        class="registration__input"
         v-model="formData.password"
         name="password"
         :rules="passwordRules"
@@ -19,7 +31,18 @@
         type="password"
         autocomplete="current-password"
       />
-      <ButtonSubmit class="login__button" type="submit">Sign in</ButtonSubmit>
+      <CustomInput
+        class="registration__input"
+        v-model="formData.confirmPassword"
+        name="password"
+        :rules="confirmPassword"
+        placeholder="Confirm password"
+        type="password"
+        autocomplete="current-password"
+      />
+      <ButtonSubmit class="registration__button" type="submit"
+        >Sign in</ButtonSubmit
+      >
     </FormApp>
   </AuthContainer>
 </template>
@@ -34,10 +57,10 @@ import {
   isRequired,
 } from "../../../utils/validationRules.js";
 import AuthContainer from "../../auth//AuthContainer.vue";
-import { loginUser } from "../../../services/auth.service.js";
+import { registerUser } from "../../../services/auth.service.js";
 
 export default {
-  name: "LoginForm",
+  name: "RegistrationForm",
   components: {
     FormApp,
     CustomInput,
@@ -47,8 +70,10 @@ export default {
   data() {
     return {
       formData: {
+        name: "",
         email: "",
         password: "",
+        confirmPassword: "",
       },
     };
   },
@@ -60,20 +85,34 @@ export default {
         isRequired,
       };
     },
+    nameRules() {
+      return [this.rules.isRequired];
+    },
     emailRules() {
       return [this.rules.isRequired, this.rules.emailValidation];
     },
     passwordRules() {
-      return [this.rules.isRequired];
+      return [this.rules.isRequired, this.rules.passwordValidation];
+    },
+    confirmPassword() {
+      return [
+        (val) => ({
+          hasPassed: val === this.formData.password,
+          message: "Password mismatch",
+        }),
+      ];
     },
   },
   methods: {
     async handleSubmit() {
-      const isFormValid = this.$refs.form.validate();
+      const { form } = this.$refs;
+      const isFormValid = form.validate();
+      const { name, password, email } = this.formData;
       if (!isFormValid) {
         try {
-          const { data } = await loginUser(this.formData);
+          const { data } = await registerUser({ name, password, email });
           console.log(data);
+          form.reset();
         } catch (error) {
           console.log(error);
         }
@@ -84,7 +123,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
+.registration {
   &__form {
     display: block;
     flex-direction: column;
