@@ -1,6 +1,6 @@
 <template>
   <AuthContainer class="login">
-    <h1 class="login__title">Login</h1>
+    <MainTitle class="login__title">Log in</MainTitle>
     <FormApp class="login__form" ref="form" @submit.prevent="handleSubmit">
       <CustomInput
         v-model="formData.email"
@@ -8,7 +8,8 @@
         :rules="emailRules"
         class="login__input"
         placeholder="Email"
-        autocomplete="email"
+        @input="handleChangeEmail"
+        :value="formData.email"
       />
       <CustomInput
         class="login__input"
@@ -17,9 +18,12 @@
         :rules="passwordRules"
         placeholder="Password"
         type="password"
-        autocomplete="current-password"
+        :value="formData.password"
+        @input="handleChangePassword"
       />
-      <ButtonSubmit class="login__button" type="submit">Sign in</ButtonSubmit>
+      <ButtonSubmit class="login__button" type="submit" :loading="loading"
+        >Sign in</ButtonSubmit
+      >
     </FormApp>
   </AuthContainer>
 </template>
@@ -33,8 +37,9 @@ import {
   passwordValidation,
   isRequired,
 } from "../../../utils/validationRules.js";
-import AuthContainer from "../../auth//AuthContainer.vue";
+import AuthContainer from "../../auth/AuthContainer.vue";
 import { loginUser } from "../../../services/auth.service.js";
+import MainTitle from "../../Shared/Form/MainTitle.vue";
 
 export default {
   name: "LoginForm",
@@ -43,9 +48,11 @@ export default {
     CustomInput,
     ButtonSubmit,
     AuthContainer,
+    MainTitle,
   },
   data() {
     return {
+      loading: false,
       formData: {
         email: "",
         password: "",
@@ -72,12 +79,22 @@ export default {
       const isFormValid = this.$refs.form.validate();
       if (!isFormValid) {
         try {
+          this.loading = true;
           const { data } = await loginUser(this.formData);
           console.log(data);
         } catch (error) {
           console.log(error);
+        } finally {
+          this.loading = false;
         }
       }
+    },
+    handleChangeEmail(event) {
+      this.formData.email = event.target?.value;
+    },
+
+    handleChangePassword(event) {
+      this.formData.password = event.target?.value;
     },
   },
 };

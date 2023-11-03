@@ -13,6 +13,7 @@ export default {
 <style lang="scss" scoped>
 .error {
   &__title {
+    margin-top: 350px;
     font-size: 60px;
     text-align: center;
     color: red;

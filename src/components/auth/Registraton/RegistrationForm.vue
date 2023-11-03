@@ -1,6 +1,6 @@
 <template>
   <AuthContainer class="registration">
-    <h1 class="registration__title">Registration</h1>
+    <MainTitle class="registration__title">Registration</MainTitle>
     <FormApp
       class="registration__form"
       ref="form"
@@ -12,7 +12,8 @@
         :rules="nameRules"
         class="registration__input"
         placeholder="Name"
-        autocomplete="username"
+        @input="handleChangeName"
+        :value="formData.name"
       />
       <CustomInput
         v-model="formData.email"
@@ -20,7 +21,8 @@
         :rules="emailRules"
         class="registration__input"
         placeholder="Email"
-        autocomplete="email"
+        @input="handleChangeEmail"
+        :value="formData.email"
       />
       <CustomInput
         class="registration__input"
@@ -29,18 +31,22 @@
         :rules="passwordRules"
         placeholder="Password"
         type="password"
-        autocomplete="current-password"
+        @input="handleChangePassword"
       />
       <CustomInput
         class="registration__input"
         v-model="formData.confirmPassword"
         name="password"
-        :rules="confirmPassword"
+        :rules="confirmPasswordRules"
+        :value="formData.confirmPassword"
         placeholder="Confirm password"
         type="password"
-        autocomplete="current-password"
+        @input="handleChangeConfirmPassword"
       />
-      <ButtonSubmit class="registration__button" type="submit"
+      <ButtonSubmit
+        class="registration__button"
+        type="submit"
+        :loading="loading"
         >Sign in</ButtonSubmit
       >
     </FormApp>
@@ -56,8 +62,9 @@ import {
   passwordValidation,
   isRequired,
 } from "../../../utils/validationRules.js";
-import AuthContainer from "../../auth//AuthContainer.vue";
+import AuthContainer from "../../auth/AuthContainer.vue";
 import { registerUser } from "../../../services/auth.service.js";
+import MainTitle from "../../Shared/Form/MainTitle.vue";
 
 export default {
   name: "RegistrationForm",
@@ -66,9 +73,11 @@ export default {
     CustomInput,
     ButtonSubmit,
     AuthContainer,
+    MainTitle,
   },
   data() {
     return {
+      loading: false,
       formData: {
         name: "",
         email: "",
@@ -94,10 +103,10 @@ export default {
     passwordRules() {
       return [this.rules.isRequired, this.rules.passwordValidation];
     },
-    confirmPassword() {
+    confirmPasswordRules() {
       return [
         (val) => ({
-          hasPassed: val === this.formData.password,
+          hasPassed: val === this.formData.confirmPassword,
           message: "Password mismatch",
         }),
       ];
@@ -110,13 +119,55 @@ export default {
       const { name, password, email } = this.formData;
       if (!isFormValid) {
         try {
+          this.loading = true;
           const { data } = await registerUser({ name, password, email });
           console.log(data);
           form.reset();
+          this.loading = false;
         } catch (error) {
           console.log(error);
         }
+        this.loading = false;
       }
+    },
+    formReset() {
+      this.formData = {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      };
+    },
+    handleChangeName(event) {
+      if (event === true) {
+        this.formData.name = "";
+        return;
+      }
+      this.formData.name = event.target?.value;
+    },
+
+    handleChangeEmail(event) {
+      if (event === true) {
+        this.formData.email = "";
+        return;
+      }
+      this.formData.email = event.target?.value;
+    },
+
+    handleChangePassword(event) {
+      if (event === true) {
+        this.formData.password = "";
+        return;
+      }
+      this.formData.password = event.target?.value;
+    },
+
+    handleChangeConfirmPassword(event) {
+      if (event === true) {
+        this.formData.confirmPassword = "";
+        return;
+      }
+      this.formData.confirmPassword = event.target?.value;
     },
   },
 };

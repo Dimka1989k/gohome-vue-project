@@ -1,9 +1,15 @@
-import axios from "../utils/axios";
+import axios from "axios";
+
+const axiosInstance = axios.create({
+  baseUrl: "https://apt-booking-api.herokuapp.com",
+});
 
 export const getApartmentsList = () => {
-  return axios.get("/apartments");
+  return axiosInstance.get("https://apt-booking-api.herokuapp.com/apartments");
 };
 
 export const getApartmentById = (id) => {
-  return axios.get(`/apartments/${id}`);
+  return axiosInstance.get(
+    `https://apt-booking-api.herokuapp.com/apartments/${id}`
+  );
 };

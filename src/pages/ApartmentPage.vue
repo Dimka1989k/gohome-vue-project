@@ -9,7 +9,7 @@
               class="apartment-page__owner"
               :owner="apartment.owner"
             />
-            <ReviewsYour :reviews="reviewsList" />
+            <ReviewsYour :reviews="reviews" />
           </div>
         </div>
       </ContainerShared>
@@ -23,8 +23,8 @@ import ApartmentsMainInfo from "../components/apartment/ApartmentsMainInfo.vue";
 import ApartmentsOwner from "../components/apartment/ApartmentsOwner.vue";
 import ReviewsYour from "../components/reviews/ReviewsYour.vue";
 import reviewsList from "../components/reviews/reviews.json";
-import { getApartmentById } from "../services/apartments.service";
-import SectionSpacer from "@/components/Shared/SectionSpacer.vue";
+import { getApartmentById } from "../services/apartments.service.js";
+import SectionSpacer from "../components/Shared/SectionSpacer.vue";
 
 export default {
   name: "ApartmentPage",
@@ -41,7 +41,7 @@ export default {
     };
   },
   computed: {
-    reviewsList() {
+    reviews() {
       return reviewsList;
     },
   },
@@ -69,6 +69,12 @@ export default {
   &__owner {
     min-width: 350px;
     margin-left: 30px;
+  }
+  &__additional-info {
+    margin-left: 30px;
+    max-width: 350px;
+    flex-grow: 0;
+    flex-shrink: 1;
   }
 }
 </style>

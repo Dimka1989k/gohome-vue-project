@@ -1,9 +1,10 @@
-import VueRouter from "vue-router";
-import HomePage from "./pages/HomePage";
-import ApartmentPage from "./pages/ApartmentPage";
-import ErrorPage from "./pages/ErrorPage";
-import LoginPage from "./pages/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage";
+import { createRouter, createWebHistory } from "vue-router";
+
+import HomePage from "./pages/HomePage.vue";
+import ApartmentPage from "./pages/ApartmentPage.vue";
+import ErrorPage from "./pages/ErrorPage.vue";
+import LoginPage from "./pages/LoginPage.vue";
+import RegistrationPage from "./pages/RegistrationPage.vue";
 
 const routes = [
   {
@@ -13,14 +14,14 @@ const routes = [
   },
   {
     path: "/apartments/:id",
-    name: "apartment",
     component: ApartmentPage,
+    name: "apartments",
   },
 
   {
-    path: "*",
+    path: "/:pathMatch(.*)*",
     component: ErrorPage,
-    name: "errorpage",
+    name: "error-page",
   },
   {
     path: "/login",
@@ -28,15 +29,20 @@ const routes = [
     name: "login-page",
   },
   {
-    path: "/registration",
+    path: "/register",
     component: RegistrationPage,
     name: "registration-page",
   },
 ];
 
-const router = new VueRouter({
-  routes,
-  mode: "history",
+const router = createRouter({
+  history: createWebHistory("/gohome-vue-project/"),
+  routes: routes,
 });
+
+// router.resolve({
+//   name: "ErrorPage",
+//   params: { pathMatch: ["error", "page"] },
+// }).href;
 
 export default router;

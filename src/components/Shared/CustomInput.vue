@@ -2,11 +2,10 @@
   <div class="wraper-input">
     <input
       v-bind="$attrs"
-      v-on:input="handleInput"
+      @blur="blurHandler"
+      @input="handleInput"
       class="custom-input"
       :class="!isValid && 'custom-input--error'"
-      :value="value"
-      @blur="blurHandler"
     />
     <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
@@ -27,8 +26,6 @@ export default {
       default: null,
     },
   },
-  inheritAttrs: false,
-
   props: {
     value: {
       type: String,
@@ -51,11 +48,15 @@ export default {
     },
   },
   mounted() {
-    if (!this.form) return;
+    if (!this.form) {
+      return;
+    }
     this.form.registerInput(this);
   },
   beforeUnmount() {
-    if (!this.form) return;
+    if (!this.form) {
+      return;
+    }
     this.form.unRegisterInput(this);
   },
 
@@ -71,18 +72,17 @@ export default {
         }
         return hasPassed;
       });
-      return this.isValid;
+    },
+    reset() {
+      this.isFirstInput = true;
+      this.isValid = true;
+      this.$emit("input", this.isFirstInput);
     },
     blurHandler() {
       if (this.isFirstInput) {
         this.validate();
       }
       this.isFirstInput = false;
-    },
-    reset() {
-      this.isFirstInput = true;
-      this.isValid = true;
-      this.$emit("input", "");
     },
   },
 };

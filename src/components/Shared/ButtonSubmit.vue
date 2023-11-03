@@ -2,16 +2,23 @@
   <button
     v-bind="$attrs"
     :type="type"
+    :disabled="loading"
     :class="{ btn: true, 'btn--outlined': outlined }"
   >
-    <slot></slot>
+    <CircleLoader v-if="loading" class="btn__loader" width="38" height="38" />
+    <span class="btn__content" :class="contentStyle">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
 <script>
+import CircleLoader from "../Loaders/CircleLoaders.vue";
 export default {
   name: "ButtonSubmit",
-
+  components: {
+    CircleLoader,
+  },
   props: {
     type: {
       type: String,
@@ -20,6 +27,17 @@ export default {
     outlined: {
       type: Boolean,
       default: false,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    contentStyle() {
+      return {
+        "btn__content--hidden": this.loading,
+      };
     },
   },
 };
@@ -49,6 +67,13 @@ export default {
     &--hidden {
       opacity: 0;
     }
+  }
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

@@ -4,17 +4,18 @@
       :items="cities"
       v-model="city"
       class="form__select"
-      id="city-select"
+      @change="handleSelectForm"
     />
     <CustomInput
       v-model="price"
-      placeholder="Price from"
-      id="price-input"
-      error-message="This field must not be empty"
+      placeholder="Price, from"
+      @input="handleChangeInput"
+      :value="valueInput"
+      errorMessage="This field must not be empty"
       :rules="rules"
     />
     <ButtonSubmit class="form__submit" type="submit"
-      >Housing selection</ButtonSubmit
+      >Find apartments</ButtonSubmit
     >
   </form>
 </template>
@@ -36,6 +37,7 @@ export default {
     return {
       price: "",
       city: "",
+      valueInput: "",
     };
   },
 
@@ -60,6 +62,13 @@ export default {
   methods: {
     handleSubmit() {
       this.$emit("submit", { city: this.city, price: this.price });
+    },
+    handleChangeInput(event) {
+      this.price = event.target?.value;
+      this.valueInput = event.target?.value;
+    },
+    handleSelectForm(event) {
+      this.city = event.target?.value;
     },
   },
 };

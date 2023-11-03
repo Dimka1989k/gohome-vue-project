@@ -1,5 +1,5 @@
 <template>
-  <select v-bind="$attrs" v-on:input="handleInput" class="custom-select">
+  <select v-bind="$attrs" class="custom-select" @change="handleSelect">
     <option
       v-for="item in formatedItems"
       :key="item.value"
@@ -28,8 +28,8 @@ export default {
     },
   },
   methods: {
-    handleInput(event) {
-      this.$emit("input", event.target.value);
+    handleSelect(event) {
+      this.$emit("change", event.target.value);
     },
   },
 };
