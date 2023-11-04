@@ -125,7 +125,11 @@ export default {
           form.reset();
           this.loading = false;
         } catch (error) {
-          console.log(error);
+          this.$notify({
+            type: "error",
+            title: "An error has occurred",
+            text: error.massage,
+          });
         }
         this.loading = false;
       }
