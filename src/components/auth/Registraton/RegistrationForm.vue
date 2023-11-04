@@ -63,7 +63,6 @@ import {
   isRequired,
 } from "../../../utils/validationRules.js";
 import AuthContainer from "../../auth/AuthContainer.vue";
-import { registerUser } from "../../../services/auth.service.js";
 import MainTitle from "../../Shared/Form/MainTitle.vue";
 
 export default {
@@ -120,10 +119,10 @@ export default {
       if (!isFormValid) {
         try {
           this.loading = true;
-          const { data } = await registerUser({ name, password, email });
-          console.log(data);
+          await this.$store.dispatch("registration", { name, password, email });
+
+          this.$router.push({ name: "homepage" });
           form.reset();
-          this.loading = false;
         } catch (error) {
           this.$notify({
             type: "error",

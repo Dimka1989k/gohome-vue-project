@@ -38,7 +38,6 @@ import {
   isRequired,
 } from "../../../utils/validationRules.js";
 import AuthContainer from "../../auth/AuthContainer.vue";
-import { loginUser } from "../../../services/auth.service.js";
 import MainTitle from "../../Shared/Form/MainTitle.vue";
 
 export default {
@@ -76,12 +75,14 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      const { form } = this.$refs;
       const isFormValid = this.$refs.form.validate();
       if (!isFormValid) {
         try {
           this.loading = true;
-          const { data } = await loginUser(this.formData);
-          console.log(data);
+          await this.$store.dispatch("loginn", this.formData);
+          this.$router.push({ name: "homepage" });
+          form.reset();
         } catch (error) {
           this.$notify({
             type: "error",
@@ -93,6 +94,7 @@ export default {
         }
       }
     },
+
     handleChangeEmail(event) {
       this.formData.email = event.target?.value;
     },
