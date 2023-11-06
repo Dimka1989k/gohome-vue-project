@@ -20,7 +20,7 @@
     <ul class="account-actions__list" v-show="isOpen">
       <li class="account-actions__item">
         <router-link class="account-actions__link" :to="{ name: 'my-orders' }"
-          >My orders</router-link
+          >Orders</router-link
         >
       </li>
       <li class="account-actions__item">
@@ -83,7 +83,6 @@ export default {
     color: inherit;
     font-family: inherit;
     font-size: 16px;
-    padding: 0;
     transition: color 0.4s;
 
     &:hover {
@@ -110,18 +109,21 @@ export default {
     position: absolute;
     right: 0;
     top: 100%;
-    background: #fff;
     padding: 15px;
     color: #000;
-    width: 150px;
-    border: 1px solid $secondary-color;
+    width: 110px;
+    text-align: center;
   }
 
   &__item {
-    margin-bottom: 5px;
+    margin-top: 5px;
+
     transition: color 0.4s;
+    width: 100%;
+
     &:hover {
       color: $main-color;
+      border-bottom: 2px solid;
     }
   }
 
