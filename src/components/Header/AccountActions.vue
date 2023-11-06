@@ -1,5 +1,5 @@
 <template>
-  <div class="account-actions">
+  <div class="account-actions" @mouseover="open" @mouseleave="close">
     <button class="account-actions__btn" @click="toggle">
       <span class="account-actions__test">Account</span>
       <svg
@@ -19,7 +19,7 @@
     </button>
     <ul class="account-actions__list" v-show="isOpen">
       <li class="account-actions__item">
-        <router-link class="account-actions__link" :to="{}"
+        <router-link class="account-actions__link" :to="{ name: 'my-orders' }"
           >My orders</router-link
         >
       </li>
@@ -92,6 +92,9 @@ export default {
   }
 
   &__text {
+    margin-right: 5px;
+  }
+  &__test {
     margin-right: 5px;
   }
 
