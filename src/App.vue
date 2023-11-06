@@ -11,7 +11,7 @@
 
 <script>
 import FooterApp from "./components/Shared/FooterApp.vue";
-import HeaderApp from "./components/Shared/HeaderApp.vue";
+import HeaderApp from "./components/Header/HeaderApp.vue";
 
 export default {
   name: "App",

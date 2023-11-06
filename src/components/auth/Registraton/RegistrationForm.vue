@@ -120,7 +120,6 @@ export default {
         try {
           this.loading = true;
           await this.$store.dispatch("registration", { name, password, email });
-
           this.$router.push({ name: "homepage" });
           form.reset();
         } catch (error) {

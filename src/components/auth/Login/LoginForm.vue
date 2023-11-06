@@ -80,7 +80,7 @@ export default {
       if (!isFormValid) {
         try {
           this.loading = true;
-          await this.$store.dispatch("loginn", this.formData);
+          await this.$store.dispatch("login", this.formData);
           this.$router.push({ name: "homepage" });
           form.reset();
         } catch (error) {

@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
-import { loginUser, registerUser } from "../services/auth.service.js";
+import { loginUser, registerUser, logout } from "../services/auth.service.js";
+import createPersistedState from "vuex-persistedstate";
 
 const initialState = {
   user: null,
@@ -10,6 +11,11 @@ export const store = createStore({
   state() {
     return { ...initialState };
   },
+  getters: {
+    isLoggedIn(state) {
+      return Boolean(state.token);
+    },
+  },
 
   mutations: {
     setUserData(state, userData) {
@@ -18,6 +24,9 @@ export const store = createStore({
 
     setToken(state, token) {
       state.token = token;
+    },
+    clearUserData(state) {
+      Object.assign(state, { ...initialState });
     },
   },
   actions: {
@@ -33,5 +42,11 @@ export const store = createStore({
       commit("setUserData", user);
       commit("setToken", token);
     },
+    async logout({ commit }) {
+      await logout();
+      commit("clearUserData");
+    },
   },
+
+  plugins: [createPersistedState({ paths: ["token"] })],
 });

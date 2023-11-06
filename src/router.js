@@ -40,9 +40,4 @@ const router = createRouter({
   routes: routes,
 });
 
-// router.resolve({
-//   name: "ErrorPage",
-//   params: { pathMatch: ["error", "page"] },
-// }).href;
-
 export default router;
