@@ -10,7 +10,7 @@ const MyOrdersPage = () => import("./pages/MyOrdersPage.vue");
 
 const routes = [
   {
-    path: "/",
+    path: "/gohome-vue-project",
     component: HomePage,
     name: "homepage",
   },
