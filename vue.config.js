@@ -1,3 +1,4 @@
 module.exports = {
-  publicPath: "/gohome-vue-project/",
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/gohome-vue-project/" : "/",
 };

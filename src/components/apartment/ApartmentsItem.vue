@@ -70,7 +70,7 @@ export default {
     min-height: 200px;
     color: #fff;
     text-align: left;
-    line-height: 1.4;
+    line-height: 1.3;
     cursor: pointer;
     z-index: 1;
 
