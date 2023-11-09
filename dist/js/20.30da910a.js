@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkgohome_vue_project"]=self["webpackChunkgohome_vue_project"]||[]).push([[20],{1020:function(e,r,n){n.r(r),n.d(r,{default:function(){return i}});var o=n(6252);const t=e=>((0,o.dD)("data-v-2670dec6"),e=e(),(0,o.Cn)(),e),c={class:"error"},a=t((()=>(0,o._)("h1",{class:"error__title"},"404 Page not found",-1))),s=[a];function u(e,r,n,t,a,u){return(0,o.wg)(),(0,o.iD)("section",c,s)}var d={name:"ErrorPage"},_=n(3744);const f=(0,_.Z)(d,[["render",u],["__scopeId","data-v-2670dec6"]]);var i=f}}]);
+//# sourceMappingURL=20.30da910a.js.map

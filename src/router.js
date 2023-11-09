@@ -56,7 +56,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("/gohome-vue-project/"),
+  history: createWebHistory(),
   routes: routes,
 });
 
